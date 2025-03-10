@@ -1,0 +1,9 @@
+1. Install Git for Windows, which includes Git bash 
+2. Open Git bash 
+3. Change directory to the input folder: 
+
+cd /path/to/input/folder
+
+4. Run: 
+
+sh /path/to/merge_fastq.sh 
