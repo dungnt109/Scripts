@@ -10,6 +10,8 @@ print("Don't close this window.")
 
 path = "C:\\Users\\HaemOnco\\Documents\\screenshots\\"
 
+separator = "\\"
+
 def take_screenshot():
 
     print("take screenshot...")
@@ -19,7 +21,7 @@ def take_screenshot():
 
     if not os.path.isdir( path + folder):
         os.mkdir(path + folder) 
-    save_path = path + folder + "\\" + date_string + "_DN.png"
+    save_path = path + folder + separator + date_string + "_DN.png"
 
     print(save_path)
 
