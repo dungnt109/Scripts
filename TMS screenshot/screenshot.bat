@@ -1,0 +1,1 @@
+pythonw.exe C:\Users\HaemOnco\Desktop\screenshot.py
