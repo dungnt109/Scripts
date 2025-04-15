@@ -8,6 +8,8 @@ import os
 print("Take screenhots daily at 9 AM...")
 print("Don't close this window.")
 
+path = "C:\\Users\\HaemOnco\\Documents\\screenshots\\"
+
 def take_screenshot():
 
     print("take screenshot...")
@@ -15,9 +17,9 @@ def take_screenshot():
     date_string = datetime.datetime.now().strftime("%d-%m-%Y_%H_%M_%S")
     folder = datetime.datetime.now().strftime("%d-%m-%Y")
 
-    if not os.path.isdir("C:\\Users\\HaemOnco\\Documents\\screenshots\\"+ folder):
-        os.mkdir("C:\\Users\\HaemOnco\\Documents\\screenshots\\"+ folder) 
-    save_path = "C:\\Users\\HaemOnco\\Documents\\screenshots\\"+ folder + "\\" + date_string + "_DN.png"
+    if not os.path.isdir( path + folder):
+        os.mkdir(path + folder) 
+    save_path = path + folder + "\\" + date_string + "_DN.png"
 
     print(save_path)
 
