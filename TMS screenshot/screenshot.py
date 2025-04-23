@@ -55,10 +55,10 @@ for hour in range(0, 12):
     schedule.every().hour.at(":"+str(hour*5).zfill(2)).do(take_screenshot)
 
 
-#while True:
+while True:
     
-#    schedule.run_pending()
-#    time.sleep(60) # wait one minute
+    schedule.run_pending()
+    time.sleep(30) # wait one minute
 
-take_screenshot()
+#take_screenshot()
     
