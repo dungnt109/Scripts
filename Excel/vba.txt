@@ -1,0 +1,90 @@
+Sub CreateTables()
+
+    Application.Calculation = xlManual
+    Application.ScreenUpdating = False
+    
+
+    Dim i As Integer
+    Dim j As Integer
+    Dim k As Integer
+    Dim startRow As Integer
+    Dim startColumn As Integer
+
+    ' Set the starting row and column
+    startRow = 2
+    startColumn = 1
+    boxCount = 0
+    
+    Sheets("Sheet1").Range("A1:CV10000").Clear
+    
+    Range("A1:CV10000").EntireColumn.ColumnWidth = 8
+    Range("A1:CV10000").EntireRow.RowHeight = 40
+    
+    Dim alphabet(1 To 26) As String
+    Dim t As Integer
+    
+    For t = 1 To 26
+        alphabet(t) = Chr(64 + t)
+    Next t
+    
+
+
+
+
+
+    ' Create 5 tables
+    For k = 1 To 1000
+        ' Create a 9x9 table
+        
+        For t = 0 To 9
+        
+        boxCount = boxCount + 1
+        
+        If boxCount = 10000 Then
+          Exit For
+        End If
+        
+        
+        Cells(startRow - 1, startColumn + 10 * t).Value = "Box " & Format(boxCount, "0000")
+        
+        For i = 0 To 8
+            For j = t * 10 To t * 10 + 8
+            
+                Position = "" & Format(boxCount, "0000") & alphabet(j Mod 10 + 1) & (i + 1)
+                
+                Formula = "=IFERROR(CONCATENATE(VLOOKUP(""" & Position & """,POS,2,0),CHAR(10),VLOOKUP(""" & Position & """,POS,3,0)),"""")"
+               
+                Cells(startRow + i, startColumn + j).Formula = Formula
+                
+                
+                With Cells(startRow + i, startColumn + j).Borders
+                    .LineStyle = xlContinuous
+                    .Color = RGB(0, 0, 0) ' Black color
+                    .Weight = xlThin
+                  
+                End With
+                With Cells(startRow + i, startColumn + j)
+                     .WrapText = True
+                     .HorizontalAlignment = xlCenter
+                     .VerticalAlignment = xlCenter
+                End With
+                
+     
+                
+                
+            Next j
+        Next i
+        
+           
+        
+        
+        Next t
+
+        ' Move the starting row down for the next table
+        startRow = startRow + 10
+    Next k
+    
+    Application.Calculation = xlAutomatic
+    Application.ScreenUpdating = True
+    
+End Sub

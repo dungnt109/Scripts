@@ -1,0 +1,131 @@
+Sub CreateTables()
+
+    Application.Calculation = xlManual
+    Application.ScreenUpdating = False
+    
+
+    Dim i As Integer
+    Dim j As Integer
+    Dim k As Integer
+    Dim startRow As Integer
+    Dim startColumn As Integer
+
+    ' Set the starting row and column
+    startRow = 2
+    startColumn = 1
+    boxCount = 0
+    
+    Sheets("Sheet1").Range("A1:Z1000").Clear
+    
+    Range("A1:Z100").EntireColumn.ColumnWidth = 8
+    Range("A1:Z100").EntireRow.RowHeight = 40
+    
+    Dim alphabet(1 To 26) As String
+    Dim t As Integer
+    
+    For t = 1 To 26
+        alphabet(t) = Chr(64 + t)
+    Next t
+    
+
+
+
+
+
+    ' Create 5 tables
+    For k = 1 To 1000
+        ' Create a 9x9 table
+        
+        
+        boxCount = boxCount + 1
+        Cells(startRow - 1, startColumn).Value = "Box " & Format(boxCount, "0000")
+        
+        For i = 0 To 8
+            For j = 0 To 8
+            
+                Position = "" & Format(boxCount, "0000") & alphabet(j + 1) & (i + 1)
+                Formula = "=IFERROR(CONCATENATE(VLOOKUP(""" & Position & """,POS,2,0),CHAR(10),VLOOKUP(""" & Position & """,POS,3,0)),"""")"
+               
+                Cells(startRow + i, startColumn + j).Formula = Formula
+                
+                
+                With Cells(startRow + i, startColumn + j).Borders
+                    .LineStyle = xlContinuous
+                    .Color = RGB(0, 0, 0) ' Black color
+                    .Weight = xlThin
+                  
+                End With
+                With Cells(startRow + i, startColumn + j)
+                     .WrapText = True
+                     .HorizontalAlignment = xlCenter
+                     .VerticalAlignment = xlCenter
+                End With
+                
+             '   With Cells(startRow + i, startColumn + j).FormatConditions.Add(Type:=xlBlanksCondition)
+             '       .StopIfTrue = False
+             '       .Interior.PatternColorIndex = xlAutomatic
+             '       .Interior.Color = RGB(0, 0, 0)
+             '       .Interior.ThemeColor = xlThemeColorHyperlink
+             '       .Interior.TintAndShade = 0.39
+             '       .Font.Color = vbBlack
+             '       .Font.TintAndShade = 0
+             '       .Borders.LineStyle = xlContinuous
+             '       .Borders.TintAndShade = 0
+             '       .Borders.Weight = xlThin
+             '       .Borders.Color = RGB(0, 0, 0)
+             '       .StopIfTrue = False
+             '   End With
+                
+                
+            Next j
+        Next i
+        
+        boxCount = boxCount + 1
+        Cells(startRow - 1, startColumn + 10).Value = "Box " & Format(boxCount, "0000")
+        
+        For i = 0 To 8
+            For j = 10 To 18
+            
+                Position = Format(boxCount, "0000") & alphabet(j - 9) & (i + 1)
+                Formula = "=IFERROR(CONCATENATE(VLOOKUP(""" & Position & """,POS,2,0),CHAR(10),VLOOKUP(""" & Position & """,POS,3,0)),"""")"
+             
+                Cells(startRow + i, startColumn + j).Formula = Formula
+                
+                With Cells(startRow + i, startColumn + j).Borders
+                    .LineStyle = xlContinuous
+                    .Color = RGB(0, 0, 0) ' Black color
+                    .Weight = xlThin
+                End With
+                
+                With Cells(startRow + i, startColumn + j)
+                     .WrapText = True
+                     .HorizontalAlignment = xlCenter
+                     .VerticalAlignment = xlCenter
+                End With
+                
+             '   With Cells(startRow + i, startColumn + j).FormatConditions.Add(Type:=xlBlanksCondition)
+             '       .StopIfTrue = False
+             '       .Interior.PatternColorIndex = xlAutomatic
+             '       .Interior.Color = RGB(0, 0, 0)
+             '       .Interior.ThemeColor = xlThemeColorHyperlink
+             '       .Interior.TintAndShade = 0.39
+             '       .Font.Color = vbBlack
+             '       .Font.TintAndShade = 0
+             '       .Borders.LineStyle = xlContinuous
+             '       .Borders.TintAndShade = 0
+             '       .Borders.Weight = xlThin
+             '       .Borders.Color = RGB(0, 0, 0)
+             '       .StopIfTrue = False
+             '   End With
+                
+            Next j
+        Next i
+
+        ' Move the starting row down for the next table
+        startRow = startRow + 10
+    Next k
+    
+    ' Application.Calculation = xlAutomatic
+    Application.ScreenUpdating = True
+    
+End Sub
